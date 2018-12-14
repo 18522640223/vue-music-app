@@ -5,11 +5,23 @@
 </template>
 
 <script>
+import { getRecommend, ERR_OK } from '../api/recommend.js'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  created () {
+    console.log(ERR_OK)
+    this._getRecommend()
+  },
+  methods: {
+    _getRecommend () {
+      getRecommend().then((res) => {
+        console.log(res)
+      })
     }
   }
 }

@@ -11,18 +11,22 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {//实现qq音乐线上数据抓取
-      'api/fcg_yqqhomepagerecommend': {
+      '/api/fcg_yqqhomepagerecommend': {
         target: 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg',
         bypass: function (req, res, proxyOptions) {
-          req.heasers.referer = 'https://c.y.qq.com',
-          req.heasers.host = 'c.y.qq.com'
+          req.headers.referer = 'https://c.y.qq.com';
+          req.headers.host = 'c.y.qq.com'
+        },
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/fcg_yqqhomepagerecommend': ''
         }
       }
     },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: true,
+    autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-

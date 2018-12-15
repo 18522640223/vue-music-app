@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getRecommend, ERR_OK } from '../api/recommend.js'
+import { getRecommend } from '../api/recommend.js'
 export default {
   name: 'HelloWorld',
   data () {
@@ -14,7 +14,6 @@ export default {
     }
   },
   created () {
-    console.log(ERR_OK)
     this._getRecommend()
   },
   methods: {

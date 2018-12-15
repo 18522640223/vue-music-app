@@ -49,7 +49,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     watchOptions: {
       poll: config.dev.poll,
     },
-    //在server中正价node方法，做代理请求接口
+    //在server中用node，express方法，做代理请求接口
     before (app) {
       app.get('/getRecommend', (req, res) => {
         const _url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'

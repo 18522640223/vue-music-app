@@ -18,4 +18,4 @@ export function getRecommend () {
     return Promise.resolve(res.data)
   })
 }
-export const ERR_OK = '200'
+export const ERR_OK = 0

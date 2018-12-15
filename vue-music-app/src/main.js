@@ -5,6 +5,12 @@ import App from './App'
 import router from './router'
 import 'common/stylus/index.styl'
 import fastclick from 'fastclick'
+import {
+  /* eslint-disable no-unused-vars */
+  Style, // 必需
+  Slide
+} from 'cube-ui'
+Vue.use(Slide)
 
 fastclick.attach(document.body)
 Vue.config.productionTip = false

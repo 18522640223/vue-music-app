@@ -2,7 +2,6 @@
   <div class="hello">
     <m-header></m-header>
     <tab></tab>
-    2222
   </div>
 </template>
 
@@ -11,7 +10,6 @@ import { getRecommend } from '../api/recommend.js'
 import MHeader from '../components/m-header/m-header.vue'
 import Tab from '../components/tab/tab.vue'
 export default {
-  name: 'HelloWorld',
   data () {
     return {}
   },

@@ -1,6 +1,6 @@
 import axios from 'axios'
 export function getRecommend () {
-  const url = '/api/fcg_yqqhomepagerecommend'
+  const url = '/getRecommend'
   const data = Object.assign({}, {
     g_tk: 1631872066,
     uin: 1124823423,

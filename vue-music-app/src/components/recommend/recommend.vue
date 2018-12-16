@@ -86,6 +86,23 @@ export default {
   }
 }
 </script>
+<style>
+  .recommend .cube-slide-dots{
+    bottom: 5px
+  }
+  .recommend .cube-slide-dots span{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 2px;
+  }
+  .recommend .cube-slide-dots span.active{
+    transition:linear .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    width: 15px;
+    border-radius: 8px;
+    background: #fff
+  }
+</style>
 <style lang="stylus" scoped>
 @import '~common/stylus/variable'
 @import '~common/stylus/mixin'

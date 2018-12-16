@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
     <slider v-if="recommends.length">
-      <cube-slide>
+      <cube-slide :options="options">
         <cube-slide-item
           v-for="(item, index) in recommends"
           :key="index"
@@ -12,8 +12,43 @@
         </cube-slide-item>
       </cube-slide>
     </slider>
-    <div class="recommend-list">
+    <!-- <div class="recommend-list">
       <h1 class="list-title">热门歌单推荐</h1>
+    </div> -->
+    <!-- 电台 -->
+    <div class="recommend_twocol_list">
+        <h1 class="list-title">电台</h1>
+        <ul class="list-content">
+          <li v-for="(item, index) in radio" :key="index" class="list-item">
+            <img v-lazy="item.picUrl">
+            <div class="list-content-title">
+                {{item.Ftitle}}
+            </div>
+            <span class="recommend-player"></span>
+          </li>
+        </ul>
+    </div>
+    <!-- 热门歌单 -->
+    <div class="recommend_songs_list">
+      <h1 class="list-title">热门歌单</h1>
+      <ul class="list-content">
+        <li class="list-item" v-for="(item, index) in songList" :key="index">
+          <div class="list-image">
+            <img v-lazy="item.picUrl">
+            <span class="list-count">
+              <i class="list-rj"></i>
+              <span>{{item.accessnum/10000}}万</span>
+            </span>
+            <span class="recommend-player"></span>
+          </div>
+          <div class="list-desc">
+            {{item.songListDesc}}
+          </div>
+          <div class="list-title-x">
+            {{item.songListAuthor}}
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -24,7 +59,11 @@ export default {
   data () {
     return {
       recommends: [],
-      options: {}
+      radio: [],
+      songList: [],
+      options: {
+        interval: 3000
+      }
     }
   },
   created () {
@@ -38,6 +77,8 @@ export default {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
           this.recommends = res.data.slider
+          this.radio = res.data.radioList
+          this.songList = res.data.songList
         }
         console.log(res)
       })
@@ -47,7 +88,9 @@ export default {
 </script>
 <style lang="stylus" scoped>
 @import '~common/stylus/variable'
+@import '~common/stylus/mixin'
   .slider-group
+    height: 150px
     img
       width: 100%
   .recommend-list
@@ -57,4 +100,80 @@ export default {
       text-align: center
       font-size: $font-size-medium
       color: $color-theme
+  .recommend_twocol_list
+    margin-top: 20px
+    padding: 0 10px 0 10px
+    margin-bottom: 7px
+    .list-title
+      font-size: $font-size-medium-x
+      color: $color-theme
+      margin-bottom: 10px
+    .list-content
+      overflow: hidden
+      display: flex
+      justify-content: space-between
+      .list-item
+        width: 49%
+        position: relative
+        img
+          width: 100%
+        .list-content-title
+          height: 36px
+          line-height: 18px
+          font-size: $font-size-medium
+          white-space: normal
+          word-warp: break-word
+        .recommend-player
+          display: block
+          height: 24px
+          width: 24px
+          position: absolute
+          right: 3px
+          bottom: 40px
+          background: url($background-url-player)
+          background-repeat: no-repeat
+  .recommend_songs_list
+    padding: 0 10px 0 10px
+    .list-title
+      color: $color-theme
+      font-size: $font-size-medium-x
+      margin-bottom: 10px
+    .list-content
+      display: flex
+      justify-content: space-between
+      flex-wrap: wrap
+      .list-item
+        width: 49%
+        .list-image
+          position: relative
+          img
+            width: 100%
+          .list-count
+            position: absolute
+            left: 5px
+            bottom: 7px
+            font-size: $font-size-small
+          .recommend-player
+            display: block
+            height: 24px
+            width: 24px
+            position: absolute
+            right: 3px
+            bottom 5px
+            background-image: url($background-url-player)
+            background-repeat: no-repeat
+          .list-rj
+            display: inline-block
+            height: 10px
+            width: 10px
+            background-image: url($background-url-rj)
+            background-repeat: no-repeat
+        .list-desc
+          font-size: $font-size-medium
+          no-wrap()
+          margin-top: 5px
+        .list-title-x
+          font-size: $font-size-small
+          margin-top: 5px
+          margin-bottom: 5px
 </style>

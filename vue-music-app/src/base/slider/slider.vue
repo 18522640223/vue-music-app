@@ -7,30 +7,8 @@
 </template>
 <script>
 export default {
-  props: {
-    loop: {
-      type: Boolean,
-      default: true
-    },
-    autoPlay: {
-      type: Boolean,
-      default: true
-    },
-    interval: {
-      type: Number,
-      default: 4000
-    }
-  },
-  mounted () {
-    setTimeout(() => {
-      this._setSliderWidth()
-      this._initSilder()
-    }, 20)
-  },
-  methods: {
-    _setSliderWidth () {},
-    _initSilder () {}
-  }
+  mounted () {},
+  methods: {}
 }
 </script>
 <style lang="stylus" scoped>

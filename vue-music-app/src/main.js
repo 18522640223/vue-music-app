@@ -10,6 +10,10 @@ import {
   Style, // 必需
   Slide
 } from 'cube-ui'
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  loading: require('./components/m-header/logo@2x.png')
+})
 Vue.use(Slide)
 
 fastclick.attach(document.body)

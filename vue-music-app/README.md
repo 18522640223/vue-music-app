@@ -1,6 +1,7 @@
 # vue-music-app
 
-> A Vue.js project
+> A Vue.js project 基于Vue开发的Webapp音乐播放器，1.0版本
+组件库；Cube-ui，Vue-lazyload,
 
 ## Build Setup
 

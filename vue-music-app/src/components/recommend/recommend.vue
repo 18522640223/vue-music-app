@@ -1,68 +1,74 @@
 <template>
   <div class="recommend">
-    <slider v-if="recommends.length">
-      <cube-slide :options="options">
-        <cube-slide-item
-          v-for="(item, index) in recommends"
-          :key="index"
-        >
-          <a :href="item.linkUrl">
-            <img :src="item.picUrl">
-          </a>
-        </cube-slide-item>
-      </cube-slide>
-    </slider>
-    <!-- <div class="recommend-list">
-      <h1 class="list-title">热门歌单推荐</h1>
-    </div> -->
-    <!-- 电台 -->
-    <div class="recommend_twocol_list">
-        <h1 class="list-title">电台</h1>
-        <ul class="list-content">
-          <li v-for="(item, index) in radio" :key="index" class="list-item">
-            <img v-lazy="item.picUrl">
-            <div class="list-content-title">
-                {{item.Ftitle}}
-            </div>
-            <span class="recommend-player"></span>
-          </li>
-        </ul>
-    </div>
-    <!-- 热门歌单 -->
-    <div class="recommend_songs_list">
-      <h1 class="list-title">热门歌单</h1>
-      <ul class="list-content">
-        <li class="list-item" v-for="(item, index) in songList" :key="index">
-          <div class="list-image">
-            <img v-lazy="item.picUrl">
-            <span class="list-count">
-              <i class="list-rj"></i>
-              <span>{{item.accessnum/10000}}万</span>
-            </span>
-            <span class="recommend-player"></span>
-          </div>
-          <div class="list-desc">
-            {{item.songListDesc}}
-          </div>
-          <div class="list-title-x">
-            {{item.songListAuthor}}
-          </div>
-        </li>
-      </ul>
-    </div>
+    <scroll class="recommend-content" :data="data">
+      <div>
+        <slider v-if="recommends.length">
+          <cube-slide :options="options">
+            <cube-slide-item
+              v-for="(item, index) in recommends"
+              :key="index"
+            >
+              <a :href="item.linkUrl">
+                <img :src="item.picUrl">
+              </a>
+            </cube-slide-item>
+          </cube-slide>
+        </slider>
+        <!-- <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+        </div> -->
+        <!-- 电台 -->
+        <div class="recommend_twocol_list">
+            <h1 class="list-title">电台</h1>
+            <ul class="list-content">
+              <li v-for="(item, index) in radio" :key="index" class="list-item">
+                <img v-lazy="item.picUrl">
+                <div class="list-content-title">
+                    {{item.Ftitle}}
+                </div>
+                <span class="recommend-player"></span>
+              </li>
+            </ul>
+        </div>
+        <!-- 热门歌单 -->
+        <div class="recommend_songs_list">
+          <h1 class="list-title">热门歌单</h1>
+          <ul class="list-content">
+            <li class="list-item" v-for="(item, index) in songList" :key="index">
+              <div class="list-image">
+                <img v-lazy="item.picUrl">
+                <span class="list-count">
+                  <i class="list-rj"></i>
+                  <span>{{item.accessnum/10000}}万</span>
+                </span>
+                <span class="recommend-player"></span>
+              </div>
+              <div class="list-desc">
+                {{item.songListDesc}}
+              </div>
+              <div class="list-title-x">
+                {{item.songListAuthor}}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </scroll>
   </div>
 </template>
 <script>
 import { getRecommend, ERR_OK } from 'api/recommend.js'
 import Slider from 'base/slider/slider.vue'
+import Scroll from 'base/scroll/scroll.vue'
 export default {
   data () {
     return {
       recommends: [],
       radio: [],
       songList: [],
+      data: [],
       options: {
-        interval: 3000
+        interval: 5000
       }
     }
   },
@@ -70,7 +76,8 @@ export default {
     this._getRecommend()
   },
   components: {
-    Slider
+    Slider,
+    Scroll
   },
   methods: {
     _getRecommend () {
@@ -79,6 +86,8 @@ export default {
           this.recommends = res.data.slider
           this.radio = res.data.radioList
           this.songList = res.data.songList
+          this.data.push(res.data.radioList)
+          this.data.push(res.data.songList)
         }
         console.log(res)
       })
@@ -97,7 +106,7 @@ export default {
     margin: 0 2px;
   }
   .recommend .cube-slide-dots span.active{
-    transition:linear .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition:ease .5s cubic-bezier(0.075, 0.82, 0.165, 1);
     width: 15px;
     border-radius: 8px;
     background: #fff
@@ -150,7 +159,7 @@ export default {
           background: url($background-url-player)
           background-repeat: no-repeat
   .recommend_songs_list
-    padding: 0 10px 0 10px
+    padding: 0 10px 20px 10px
     .list-title
       color: $color-theme
       font-size: $font-size-medium-x
@@ -193,4 +202,13 @@ export default {
           font-size: $font-size-small
           margin-top: 5px
           margin-bottom: 5px
+.recommend
+  position: fixed
+  width: 100%
+  top: 88px
+  bottom: 0
+  .recommend-content
+    height: 100%
+    width: 100%
+    overflow: hidden
 </style>

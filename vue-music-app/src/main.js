@@ -8,14 +8,15 @@ import fastclick from 'fastclick'
 import {
   /* eslint-disable no-unused-vars */
   Style, // 必需
-  Slide
+  Slide,
+  IndexList
 } from 'cube-ui'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
-  loading: require('./components/m-header/logo@2x.png')
+  loading: require('./common/image/default_pic.jpg')
 })
 Vue.use(Slide)
-
+Vue.use(IndexList)
 fastclick.attach(document.body)
 Vue.config.productionTip = false
 /* eslint-disable no-new */

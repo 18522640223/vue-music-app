@@ -3,26 +3,32 @@
     <singer-list v-if="singerList.length">
       <cube-index-list :data="singerList"></cube-index-list>
     </singer-list>
+    <loading :flg="flg"></loading>
   </div>
 </template>
 <script>
 import { getSingerList, ERR_OK } from 'api/singer.js'
 import SingerList from 'base/singerList/singerList.vue'
+import Loading from 'base/loading/loading'
 const HOT_NAME = '热门'
 const HOT_SINGER_LENGTH = 10
 export default {
   data () {
     return {
-      singerList: []
+      singerList: [],
+      flg: false
     }
   },
   components: {
-    SingerList
+    SingerList,
+    Loading
   },
   methods: {
     _getSingerList () {
+      this.flg = true
       getSingerList().then((res) => {
         if (ERR_OK === res.data.code) {
+          this.flg = false
           // console.log(res.data.data.list)
           this._initSingerList(res.data.data.list)
         }

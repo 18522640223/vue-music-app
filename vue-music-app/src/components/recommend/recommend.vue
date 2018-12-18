@@ -54,12 +54,14 @@
         </div>
       </div>
     </scroll>
+    <loading :flg="loadingFlg"></loading>
   </div>
 </template>
 <script>
 import { getRecommend, ERR_OK } from 'api/recommend.js'
 import Slider from 'base/slider/slider.vue'
 import Scroll from 'base/scroll/scroll.vue'
+import Loading from 'base/loading/loading'
 export default {
   data () {
     return {
@@ -67,6 +69,7 @@ export default {
       radio: [],
       songList: [],
       data: [],
+      loadingFlg: false,
       options: {
         interval: 5000
       }
@@ -77,12 +80,15 @@ export default {
   },
   components: {
     Slider,
-    Scroll
+    Scroll,
+    Loading
   },
   methods: {
     _getRecommend () {
+      this.loadingFlg = true
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
+          this.loadingFlg = false
           this.recommends = res.data.slider
           this.radio = res.data.radioList
           this.songList = res.data.songList

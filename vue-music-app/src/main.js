@@ -9,7 +9,8 @@ import {
   /* eslint-disable no-unused-vars */
   Style, // 必需
   Slide,
-  IndexList
+  IndexList,
+  Loading
 } from 'cube-ui'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
@@ -17,6 +18,7 @@ Vue.use(VueLazyload, {
 })
 Vue.use(Slide)
 Vue.use(IndexList)
+Vue.use(Loading)
 fastclick.attach(document.body)
 Vue.config.productionTip = false
 /* eslint-disable no-new */

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import 'common/stylus/index.styl'
 import fastclick from 'fastclick'
+import store from './store'
 import {
   /* eslint-disable no-unused-vars */
   Style, // 必需
@@ -25,6 +26,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

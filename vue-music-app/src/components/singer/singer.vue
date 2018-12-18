@@ -109,6 +109,6 @@ export default {
       color: $color-text-l
       &.active
         color: #ffcd32
-      .cube-index-list-item-def
-        color: $color-text-l
+.cube-index-list-item-def
+  color: $color-text-l
 </style>

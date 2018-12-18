@@ -23,7 +23,7 @@ export default {
     _getSingerList () {
       getSingerList().then((res) => {
         if (ERR_OK === res.data.code) {
-          console.log(res.data.data.list)
+          // console.log(res.data.data.list)
           this._initSingerList(res.data.data.list)
         }
       })
@@ -33,6 +33,8 @@ export default {
         name: HOT_NAME,
         items: []
       }
+      let hot = []
+      let map2 = {}
       list.forEach((item, index) => {
         if (index < HOT_SINGER_LENGTH) {
           map.items.push({
@@ -40,9 +42,29 @@ export default {
             value: item.Fsinger_mid
           })
         }
+        let k = item.Findex
+        if (!map2[k]) {
+          map2[k] = {
+            name: k,
+            items: []
+          }
+        }
+        map2[k].items.push({
+          name: item.Fsinger_name,
+          value: item.Fsinger_mid
+        })
       })
-      console.log(map)
-      this.singerList.push(map)
+      hot.push(map)
+      // 数据处理后需要排序
+      let ret = []
+      for (var i in map2) {
+        let val = map2[i]
+        ret.push(val)
+      }
+      ret.sort((a, b) => {
+        return a.name.charCodeAt(0) - b.name.charCodeAt(0)
+      })
+      this.singerList = hot.concat(ret)
     }
   },
   created () {
@@ -51,4 +73,42 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  .singer-content
+    position: fixed
+    top 88px
+    bottom: 0
+    width: 100%
+</style>
+<style lang="stylus">
+@import '~common/stylus/variable'
+// 自定义项的样式
+.custom-item
+  position: relative
+  height: 70px
+  line-height: 70px
+  padding: 0 16px
+  font-size: $fontsize-medium
+// 用自定义样式，覆写内置的默认样式
+.cube-index-list-content
+  background-color: #222
+  color: $color-text-l
+.cube-index-list-anchor
+  background-color: #333
+  height: 30px
+  line-height: 30px
+  padding: 0 0 0 20px
+.cube-index-list-nav
+  right: 10px
+  padding: 20px 0
+  border-radius: 10px
+  background: rgba(0,0,0,.3)
+  >ul
+    >li
+      padding: 3px
+      font-size: 12px
+      color: $color-text-l
+      &.active
+        color: #ffcd32
+      .cube-index-list-item-def
+        color: $color-text-l
 </style>

@@ -31,7 +31,7 @@
             </ul>
         </div>
         <!-- 热门歌单 -->
-        <div class="recommend_songs_list">
+        <div class="recommend_songs_list" v-if="songList.length">
           <h1 class="list-title">热门歌单</h1>
           <ul class="list-content">
             <li class="list-item" v-for="(item, index) in songList" :key="index">

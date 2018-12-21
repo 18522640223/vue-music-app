@@ -95,4 +95,5 @@ export default {
             line-height: 30px
             font-size: $font-size-small
             no-wrap()
+            color: color-text
 </style>

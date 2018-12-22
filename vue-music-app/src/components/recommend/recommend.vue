@@ -165,7 +165,7 @@ export default {
           background: url($background-url-player)
           background-repeat: no-repeat
   .recommend_songs_list
-    padding: 0 10px 20px 10px
+    padding: 0 10px 10px 10px
     .list-title
       color: $color-theme
       font-size: $font-size-medium-x

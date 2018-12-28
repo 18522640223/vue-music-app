@@ -26,12 +26,12 @@
                 <div class="list-content-title">
                     {{item.Ftitle}}
                 </div>
-                <span class="recommend-player"></span>
+                <span class="recommend-player icon-play-mini"></span>
               </li>
             </ul>
         </div>
         <!-- 热门歌单 -->
-        <div class="recommend_songs_list" v-if="songList.length">
+        <div class="recommend-songs-list" v-if="songList.length">
           <h1 class="list-title">热门歌单</h1>
           <ul class="list-content">
             <li class="list-item" v-for="(item, index) in songList" :key="index">
@@ -41,7 +41,7 @@
                   <i class="list-rj"></i>
                   <span>{{item.accessnum/10000}}万</span>
                 </span>
-                <span class="recommend-player"></span>
+                <span class="recommend-player icon-play-mini"></span>
               </div>
               <div class="list-desc">
                 {{item.songListDesc}}
@@ -157,14 +157,12 @@ export default {
           word-warp: break-word
         .recommend-player
           display: block
-          height: 24px
-          width: 24px
+          height: 16px
+          width: 16px
           position: absolute
-          right: 3px
-          bottom: 40px
-          background: url($background-url-player)
-          background-repeat: no-repeat
-  .recommend_songs_list
+          right: 10px
+          bottom: 45px
+  .recommend-songs-list
     padding: 0 10px 10px 10px
     .list-title
       color: $color-theme
@@ -190,10 +188,9 @@ export default {
             height: 24px
             width: 24px
             position: absolute
-            right: 3px
+            right: 5px
             bottom 5px
-            background-image: url($background-url-player)
-            background-repeat: no-repeat
+            extend-click()
           .list-rj
             display: inline-block
             height: 10px
